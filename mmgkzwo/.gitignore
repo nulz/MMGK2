@@ -1,0 +1,10 @@
+/document.pdf
+/document.synctex.gz
+/
+tmp
+*.aux
+*.log
+*.acn
+*.glo
+*.lol
+*.ist
