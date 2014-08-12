@@ -8,3 +8,4 @@ tmp
 *.glo
 *.lol
 *.ist
+/document.synctex
