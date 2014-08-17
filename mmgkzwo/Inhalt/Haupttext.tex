@@ -26,27 +26,43 @@ Funktionen eingegangen, welche im dritten Kapitel praktisch untersucht werden.
 In der Zusammenfassung wird Bezug nehmend auf die Ergebnisse ein Vergleich mit
 der Version 7 gezogen.
  
-\chapter{Grundlagen}
+\chapter{Java Grundlagen}
 \label{sec:Grundlagen}
-Hier steht der erste Text.
+Bei der Programmiersprache Java handelt es sich um eine objektorientierte
+Programmiersprache, welche die Java Virtual Machine als Kernstück zur Ausführung
+des Codes benutzt. Dabei spielen der Just-In-Time-Compiler, sowie der Garbage
+Collector eine wichtige Rolle. Die grundlegenden Begriffe werden in den
+Folgenden Kapiteln beschrieben.
 
 \section{Objektorientierte Programmierung}
 \label{sec:OO}
 Die objektorientierte Programmierung ist ein fundamentaler Programmierstil, der
 auf dem Prinzip basiert, dass der von der zu Programmierenden Sache betroffene
-Bereich der Wirklichkeit als Modell in der Architektur widergespiegelt ist.
+Bereich der Wirklichkeit als Modell in der Architektur widergespiegelt wird.
 Dabei werden Konzepte wie Klassen, Objekte und Vererbung genutzt.
 In der Objektorientierten Programmiersprache Java kann so zum Beispiel die
 Klasse "`Buch"' den Rahmen zum Erzeugen des gleichnamigen Objektes geben. Dabei
-kann das Objekt mehrere Eigenschaften besitzen und weiteren Klassen, die
-wiederum Objekte erzeugen, besitzen. 
+kann das Objekt mehrere Eigenschaften und weiteren Klassen, die
+wiederum Objekte erzeugen, besitzen. Ein Buchobjekt kann somit aus mehreren
+Objekten "`Seite"' bestehen, welche wiederum Eigenschaften wie "`Seitenzahl"'
+erhalten kann. Weiterhin können Subklassen Eigenschaften der Klasse "`Buch"'
+erben und durch andere Attribute erweitert werden.
+Vorteile sollen dabei sein: die Wiederverwendbarkeit von Code, die effektivere
+Arbeit im Team durch Modularisierung und durch Abbildung der Wirklichkeit eine
+schnellere Erlernbarkeit. Nachteile sollen im Gegensatz zu prozeduralen Sprachen
+die geringere Laufzeiteffektivität und Energieeffizienz sein.
 
 \section{Java Virtual Machine}
 \label{sec:JVM}
+Die Java Virtual Machine ist eine virtuelle Maschine, die Java-Byte-Code
+ausführen kann.
 
 \section{Just-In-Time-Compiler}
 \label{sec:JIT}
 
+
+\section{Garbage Collector}
+\label{sec:GC}
 
 
 \chapter{Theoretische Untersuchung neuer Funktionen}
