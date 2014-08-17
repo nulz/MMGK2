@@ -4,34 +4,42 @@
 Die Programmiersprache Java galt lange Zeit als langsame Programmiersprache und
 auch derzeit hält sich das Gerücht weiterhin.
 Mit der Version 1.1.6 änderte sich das durch die Implementierung des
-Just-In-Time
-Compilers\footnote{\url{http://www.symantec.com/about/news/release/article.jsp?prid=19970407_03}}.
-Mit weiteren Versionen wurde weiter an der Performance gearbeitet. So wurden in der letzten Hauptversion Java 7 (Stand 12.08.2014) unter anderem parallele Rechnungen\footnote{\url{http://www.ibm.com/developerworks/java/library/j-jtp03048/index.html}}
- und ein neuer Garbage Collector eingeführt\footnote{\url{http://www.infoq.com/news/2008/05/g1}}.
- Auch mit Java 8 wird weiterhin die Performance verbessert. So sollen Lambda
- Ausdrücke performanter sein als innere Klassen\footnote{\url{https://blogs.oracle.com/thejavatutorials/entry/learn_more_about_performance_and}} und sind mit Hauptargument für die Umstellung und Nutzung von der neuen Java
- Version.
+Just-In-Time Compilers\cite{symantec:symantec}.
+Mit weiteren Versionen wurde weiter an der Performance gearbeitet. So wurden in
+der letzten Hauptversion Java 7 (Stand 12.08.2014) unter anderem parallele
+Rechnungen\cite{goetz:IBM} und ein neuer Garbage Collector
+eingeführt\cite{humble:infoq}.
+Auch mit Java 8 wird weiterhin die Performance verbessert\cite{gallardo:oracle}.
+So sollen Lambda Ausdrücke performanter sein als innere Klassen und sind mit Hauptargument für
+die Umstellung und Nutzung von der neuen Java Version.
  
- Diese Arbeit beschäftigt sich mit den neu eingeführten Funktionen in die
- Programmiersprache Java der Version 8 im Vergleich zur Version 7, geht dabei
- auf die dabei zu beobachtende Performance, jedoch auch auf die Komplexität und
- somit dem erhöhten Nutzen ein.
+Diese Arbeit beschäftigt sich mit einigen neu eingeführten Funktionen in die
+Programmiersprache Java der Version 8 im Vergleich zur Version 7, geht dabei
+auf die dabei zu beobachtende Performance, jedoch auch auf die Komplexität und
+somit dem erhöhten Nutzen ein.
  
- Das erste Kapitel beschreibt die Grundlagen der Programmiersprache
- Java, die allgemeine Funktionsweise und dient dem allgemeinen Verständnis der
- Arbeit.
- Im zweiten Kapitel wird auf die theoretischen Vor- und Nachteile der neuen
- Funktionen eingegangen, welche im dritten Kapitel praktisch untersucht werden.
- In der Zusammenfassung wird Bezug nehmend auf die Ergebnisse ein Vergleich mit
- der Version 7 gezogen.
+Das erste Kapitel beschreibt die Grundlagen der Programmiersprache
+Java, die allgemeine Funktionsweise und dient dem allgemeinen Verständnis der
+Arbeit.
+Im zweiten Kapitel wird auf die theoretischen Vor- und Nachteile der neuen
+Funktionen eingegangen, welche im dritten Kapitel praktisch untersucht werden.
+In der Zusammenfassung wird Bezug nehmend auf die Ergebnisse ein Vergleich mit
+der Version 7 gezogen.
  
 \chapter{Grundlagen}
 \label{sec:Grundlagen}
 Hier steht der erste Text.
 
-\section{Objektorientierung}
+\section{Objektorientierte Programmierung}
 \label{sec:OO}
-Und hier wird es schon spezifischer.
+Die objektorientierte Programmierung ist ein fundamentaler Programmierstil, der
+auf dem Prinzip basiert, dass der von der zu Programmierenden Sache betroffene
+Bereich der Wirklichkeit als Modell in der Architektur widergespiegelt ist.
+Dabei werden Konzepte wie Klassen, Objekte und Vererbung genutzt.
+In der Objektorientierten Programmiersprache Java kann so zum Beispiel die
+Klasse "`Buch"' den Rahmen zum Erzeugen des gleichnamigen Objektes geben. Dabei
+kann das Objekt mehrere Eigenschaften besitzen und weiteren Klassen, die
+wiederum Objekte erzeugen, besitzen. 
 
 \section{Java Virtual Machine}
 \label{sec:JVM}
@@ -39,10 +47,7 @@ Und hier wird es schon spezifischer.
 \section{Just-In-Time-Compiler}
 \label{sec:JIT}
 
-In unserem Netzwerk setzen wir auf \gls{AD}. Durch den Einsatz
-eines \gls{AD} erreichen wir bei \gls{T}-Systemen, die mit einer
-\gls{glos:AntwD} von \gls{CD} installiert wurden, die beste Standardisierung.
-\gls{UH}
+
 
 \chapter{Theoretische Untersuchung neuer Funktionen}
 \label{sec:Theorie}

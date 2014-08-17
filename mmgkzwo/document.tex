@@ -2,6 +2,8 @@
 \input{Header/Header}
 
 \begin{document}
+\nocite{*}
+\bibliographystyle{alpha} 
 
 %\include{Deckblatt/titel}						% Deckblatt der vorliegenden Arbeit
 \include{Deckblatt/Deckblatt5}			% Layout nach Vorgabe 5 von Herrn Thomann
@@ -9,11 +11,6 @@
 \frontmatter												% Seitenzählerstart vor dem Text
 
 \include{Inhalt/Abstrakt}						% Abstrakt
-\include{Inhalt/Danksagung}					% Danksagung
-\include{Inhalt/Vorwort}						% Vorwort
-
-\printglossary[title=Glossar] 			% Glossar Einträge in Header/Glossar.tex vornehmen
-\printglossary[type=\acronymtype,title=Abk\"urzungsverzeichnis]	% Abkürzungsverzeichnis Einträge in Header/Abkuerzungen vornehmen
 
 \listoffigures											% Abbildungsverzeichnis
 \listoftables												% Tabellenverzeichnis
