@@ -54,28 +54,118 @@ die geringere Laufzeiteffektivität und Energieeffizienz sein.
 
 \section{Java Virtual Machine}
 \label{sec:JVM}
-Die Java Virtual Machine ist eine virtuelle Maschine, die Java-Byte-Code
-ausführen kann.
+Die Java Virtual Machine(kurz JVM) ist eine virtuelle Maschine, die
+Java-Byte-Code ausführen kann. Sie ist das Grundstein jeder Java Applikation und somit
+unabdingbar. Die JVM ist es die Java seine Platform- und Hardware Unabhängigkeit
+gibt. Wie eine echte Rechenmaschine hat auch die JVM einen Befehlssatz und
+manipuliert mehrere Speicheradressen zeitgleich. Sie verabeitet nur ein
+bestimmtes Binärformat der Java Dateien, `.class` Dateien. Ansonsten weiß die
+JVM nichts von der Programmiersprache Java.
 
 \section{Just-In-Time-Compiler}
 \label{sec:JIT}
-
+Der Just-In-Time-Compiler, welcher auch kurz JIT genannt wird, wird unter
+anderem auch von der Java Virtual Machine benutzt. JIT Compiler wandeln 
+Quelltext Hauptsächlich zur Laufzeit in ausführbare Befehle um. Dieses Prinzip
+bringt mehrere Vorteile, denn zum einen werden nur Programmteile kompiliert die
+auch wirklich durchlaufen werden, was Resourcen spart. Zum anderen entfallen
+lange Startzeiten, da nur ein kleiner Teil Anfangs kompiliert wird. Bei früheren
+Java Versionen stellte dies ein Problem dar. Hinzu kommt, das bereits
+kompilierte Teile des Programms im Cache gehalten werden, was bedeutet das der
+Compiler diesen Teil nicht noch einmal durchlaufen muss.
 
 \section{Garbage Collector}
 \label{sec:GC}
-
+Trotz des JIT Compilers ist Java eine speicherlastige Sprache, abhilfe soll hier
+durch den Garbage Collector geschaffen werden. Seine Funktion besteht darin
+nicht mehr benutzte Objekte aus dem Speicher aufzuspüren und diesen Speicher
+wieder frei zu geben. Je nach Austattung der Systemhardware ist dies von nöten,
+da die JVM theoretisch bis zu 2\textasciicircum64 Adressen zur Verfügung hat.
+Natürlich nur bei 64 Bit basierten Sytemen und mit entsprechender Hardware. Beim Start kann man
+jedoch meist festlegen wieviel Speicher die JVM allokieren, also für den
+gebrauch reservieren und für anderen Applikationen sperren kann. Der Garbage
+Collector sollte für den Benutzer kaum spürbar sein, er verrichtet seine Arbeit
+meist dann wenn die Hardwarelast gering genug ist. Als Ausnahme gilt allerdings
+wenn der allokierte Speicher voll ist und mehr Speicher, zum Beispiel für das
+erstellen eines großen Objektes benötigt wird, denn an dieser Stelle muss der
+Garbage Collector auch bei hoher Last seine Arbeit verrichten.
 
 \chapter{Theoretische Untersuchung neuer Funktionen}
 \label{sec:Theorie}
 
 \section{Lambda Ausdrücke}
 \label{sec:Lambda}
+Um Lambda Ausdrücke zu verstehen sollte man den grundsätzlich Unterschied
+zwischen funktionaler und imperativer Programmiersprachen kennen. In
+vereinfachter Form kann man sagen, bei imperativen Herangehensweisen, welche
+unter anderem bei Java vorkommt, beschreibe ich im Detail, was mein Code macht
+und wie er funktioniert. Bei funktionalen Sprachen, wie Haskell, formuliert man
+das Problem als Satz von Funktionen, so dass die Reihenfolge der Berechnungen
+nicht angegeben werden muss. Das führt dazu das diese Reihenfolge auch garnicht
+relevant ist. Was bringt uns das also? Wir können mit dem Lambda Ausdruck eine
+komplexe Funktion beschreiben, welche aus mehreren Funktionen besteht und müssen
+erst dann dafür sorgen das alle Bestandteile zur Verfügung stehen wenn sie
+benötigt werden. Das begünstigt Verschachtelung von Funktionen, begrenzt
+allerdings auch die Leserlichkeit von eben diesen Funkionen. Im speziellen ist
+die Nutzung dieser Ausdrücke für Gruppen kritisch, wenn man nicht
+davon ausgehen kann das alle Mitglieder Wissen über funktionale Sprachen bzw.
+Ansätze aufweisen.
+Lambda Ausdrücke sind anonyme Funktionen, die also nur an der Stelle benutzt
+werden können an der sie beschrieben sind. Diese Tatsache ist bei der Verwendung
+von Lambda Ausdrücken wichtig, denn wenn man genau weiß das man diese Funktion
+noch einmal braucht, dann sollte man sie nicht als Lambda Funktion schreiben.
+Lambda Ausdrücke haben die Vorteile, dass wenn man einmal geübt ist, man sich
+jede Menge Code Zeilen, innere Klassen, oder komplett neue Klassen sparen kann
+und der Code trotzdem noch lesbar ist. Außerdem muss die JVM dabei weniger Daten
+handlen als bei anderen Herangehensweisen. Letzteres resultiert daher, das sich
+Klassen bzw Funktionen der Klassen gegenseitig Objekte hin und herschieben, was
+bei komplexeren Problem, bzw. Datenlastigen Objekte auch größere Dimensionen und
+damit erhöhte Rechenleistung mit sich bringt.
+
+\section{Funktionale Interfaces}
+\label{sec:FI}
+Neben den Lambda-Expressions haben mit Java 8 außerdem funktionale Interfaces
+Einzug erhalten. Jedes Interface welche nur eine Methode besitzt, wird als
+funktionales Interface bezeichnet. Interfaces mit dieser Intention erhalten in
+Java die Annotation \@FunctionalInterface. Sollte das Interface nicht den
+Rahmenbedingungen eines funktionalen Interface genügen wird der Kompiler einen
+Fehler erzeugen. Zu erwähnen sei noch, das egal ob die Annotation vorhanden ist
+oder nicht, der Kompiler wird jedes Interface, welches die Bedingungen erfüllt,
+als funktionales Interface behandeln.
+Funktionale Interfaces sind in der Lage Lambda Ausdrücke zu verwenden.
+
+\section{Default-Implementierung}
+\label{sec:DI}
+Bisher hatte man in Java-Interfaces keine Methoden Rümpfe, doch mit der
+Einführung der default-Implementierung hat sich auch das geändert. Es sind
+Standardimplementierung für eine Methode eines Interfaces. Das hat zur Folge das
+der Programmierer selbst eintscheiden kann, ob er eine bestimmte Methoden
+überschreibt um sie für ein spezielles Objekt effektiver zu gestalten.
+
+\section{Iterable-Interface und die forEach-Methode}
+\label{sec:IIufEM}
+Das Iterable-Interface ist gedacht für alle Arten von Objekte die
+"`durchlaufen"' werden können. Eine Neuerung in diesen Interfaces ist die
+forEach-Methode. Diese hilft bei der deutlichen Trennung von Geschäftlogik des
+Objekts und dem Code. An dieser Stelle sei gesagt, dass diese Änderung am Anfang
+nur nach mehr Arbeit aussieht. In Verbindung mit Lambda Ausdrücken und
+Funktionalen Interfaces können damit aber sehr effektive Programme endstehen. 
+
 
 \chapter{Praktische Untersuchung neuer Funktionen}
 \label{sec:Praxis}
 
 \section{Lambda Ausdrücke}
 \label{sec:Lambda}
+
+\section{Funktionale Interfaces}
+\label{sec:FI}
+
+\section{Default-Implementierung}
+\label{sec:DI}
+
+\section{Iterable-Interface und die forEach-Methode}
+\label{sec:IIufEM}
 
 \chapter{Zusammenfassung}
 \label{sec:Fazit}
