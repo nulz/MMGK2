@@ -148,7 +148,7 @@ dass der Programmierer selbst entscheiden kann, ob er eine bestimmte Methoden
 \label{sec:IIufEM}
 Das Iterable-Interface ist gedacht für alle Arten von Objekten die
 "`durchlaufen"' werden können. Eine Neuerung in diesen Interfaces ist die
-forEach-Methode. Diese hilft bei der deutlichen Trennung von Geschäftlogik des
+forEach-Methode. Diese hilft bei der deutlichen Trennung von Geschäftslogik des
 Objekts und dem Code. An dieser Stelle sei gesagt, dass diese Änderung am Anfang
 nur nach mehr Arbeit aussieht. In Verbindung mit Lambda Ausdrücken und
 Funktionalen Interfaces können damit aber sehr effektive Programme entstehen. 
@@ -207,14 +207,128 @@ Parameter und Körper und wird durch "`->"' symbolisiert. Alles was nach dem
 Pfeiloperator kommt ist der Funktionskörper, der seinerseits auch wieder einen
 Lambda Ausdruck enthalten kann.
 
-\section{Funktionale Interfaces}
-\label{sec:FI}
-
 \section{Default-Implementierung}
 \label{sec:DI}
 
-\section{Iterable-Interface und die forEach-Methode}
+Die neu eingeführte Default-Implementierung von Interfaces soll am folgenden
+Beispiel veranschaulicht werden.
+
+\begin{lstlisting}
+public Interface Update {
+	public void refreshValue(Integer int);
+}
+\end{lstlisting}
+
+Dieses Interface wird von den folgenden beiden Klassen implementiert.
+
+\begin{lstlisting}
+public Class NeedsValueUpdate implements Update {
+	@Override
+	public void refresh(Integer int) {
+		value = int;
+	}
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+public Class NeedsValueUpdateToo implements Update {
+	@Override
+	public void refresh(Integer int) {
+		value = int;
+	}
+}
+\end{lstlisting}
+
+Für eine neue Anforderung soll das Interface nun erweitert werden. Bisher war es
+notwendig die Methode in jeder Klasse, welche das Interface implementiert
+hatte, ebenso zu implementieren. Bei mehreren Klassen bedeutet dies einen nicht
+zu vernachlässigbaren Aufwand. Die Default-Implementierung lässt jetzt zu, dass
+direkt im Interface eine Standardimplementierung festgelegt werden kann. Damit
+ist es nicht mehr notwendig die Klassen anzupassen.
+
+\begin{lstlisting}
+public Interface Update {
+	public void refreshValue(Integer int);
+	
+	default public void printValue(Integer int) {
+		System.out.println("Value: " + int);
+	}
+}
+\end{lstlisting}
+
+Diese Funktion bringt jedoch auch Nachteile mit sich. Es besteht die
+Möglichkeit, dass eine Klasse zwei Interfaces implementiert. Wenn diese
+Interfaces nun zwei Standard-Implementierungen von Methoden mit gleichem Namen
+beinhalten, tritt ein Konflikt auf.
+\newline
+
+\begin{lstlisting}
+public Interface AnotherUpdate {
+	default public void printValue(Integer int) {
+		System.out.println("Other Value: " + int);
+	}
+}
+\end{lstlisting}
+
+Wenn dieses Interface nun von der Klasse NeedsValueUpdateToo ebenso
+implementiert wird, dann muss manuell angegeben werden, welche
+Standard-Implementierung genutzt werden soll, besonders wenn die Methode nicht
+überschrieben wird.
+
+\begin{lstlisting}
+public Class NeedsValueUpdateToo implements Update, AnotherUpdate {
+	@Override
+	public void refresh(Integer int) {
+		value = int;
+	}
+	
+	@Override
+	public void printValue(Integer int) {
+		AnotherUpdate.super.printValue(int);
+	}
+}
+\end{lstlisting}
+
+\section{Funktionale Interfaces, Iterable-Interface und die forEach-Methode}
 \label{sec:IIufEM}
+
+Bis Java 8 wurde das Durchlaufen von Daten folgendermaßen durchgeführt:
+
+\begin{lstlisting}
+List<String> stringList = Arrays.asList("first", "second", "third");
+for (String string : stringList) {
+	System.out.println(string);
+}
+\end{lstlisting}
+
+Mit der neuen forEach-Methode, die im Iterable-Interface dazugekommen ist, wird
+die gleiche Funktion wie folgt aufgerufen:
+
+\begin{lstlisting}
+List<String> stringList = Arrays.asList("first", "second", "third");
+stringList.forEach(new Consumer<String>() {
+	public void accept(String string) {
+		System.out.println(string);
+	}
+}
+\end{lstlisting}
+
+Diese Implementierung bringt eine zwar eine bessere Trennung von Iteration und
+Verarbeitung der Elemente mit sich, ist jedoch länger, verschachtelter und
+dadurch unübersichtlicher als die zuvor gezeigte. Abhilfe schaffen hier
+Lambda-Expressions, die den Quelltext im Gegensatz zum ersten Beispiel verkürzen
+und Übersichtlichkeit bewahren. Somit kann die Abbildung des Durchlaufens auf
+eine Zeile verringert werden.
+Die Lambda-Expression darf bei diesem Beispiel genutzt werden, da das Interface
+Iterable ein FunctionalInterface ist.
+
+Der unter Hilfenahme der oben beschriebenen Methoden resultierende Quelltext
+wird im folgenden dargestellt.
+
+\begin{lstlisting}
+List<String> stringList = Arrays.asList("first", "second", "third");
+stringList.forEach((String string) -> System.out.println(string));
+\end{lstlisting}
 
 \chapter{Zusammenfassung}
 \label{sec:Fazit}
