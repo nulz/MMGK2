@@ -56,9 +56,9 @@ die geringere Laufzeiteffektivität und Energieeffizienz sein.
 \label{sec:JVM}
 Die Java Virtual Machine(kurz JVM) ist eine virtuelle Maschine, die
 Java-Byte-Code ausführen kann. Sie ist der Grundstein jeder Java Applikation und
-somit unabdingbar. Die JVM ist es, die Java seine Platform- und Hardware
+somit unabdingbar. Die JVM ist es, die Java seine Plattform- und Hardware
 Unabhängigkeit gibt. Wie eine echte Rechenmaschine hat auch die JVM einen Befehlssatz und
-manipuliert mehrere Speicheradressen zeitgleich. Sie verabeitet nur ein
+manipuliert mehrere Speicheradressen zeitgleich. Sie verarbeitet nur ein
 bestimmtes Binärformat der Java Dateien, `.class` Dateien. Ansonsten weiß die
 JVM nichts von der Programmiersprache Java.
 
@@ -68,22 +68,22 @@ Der Just-In-Time-Compiler, welcher auch kurz JIT genannt wird, wird unter
 anderem auch von der Java Virtual Machine benutzt. JIT Compiler wandeln 
 Quelltext hauptsächlich zur Laufzeit in ausführbare Befehle um. Dieses Prinzip
 bringt mehrere Vorteile, denn zum einen werden nur Programmteile kompiliert die
-auch wirklich durchlaufen werden, was Resourcen spart. Zum anderen entfallen
+auch wirklich durchlaufen werden, was Ressourcen spart. Zum anderen entfallen
 lange Startzeiten, da nur ein kleiner Teil Anfangs kompiliert wird. Bei früheren
 Java Versionen stellte die mitunter lange Startzeit ein Problem dar. Hinzu
-kommt, das bereits kompilierte Teile des Programms im Cache gehalten werden, was bedeutet das der
-Compiler diesen Teil nicht noch einmal durchlaufen muss.
+kommt, dass bereits kompilierte Teile des Programms im Cache gehalten werden,
+was bedeutet, dass der Compiler diesen Teil nicht noch einmal durchlaufen muss.
 
 \section{Garbage Collector}
 \label{sec:GC}
-Trotz des JIT Compilers ist Java eine speicherlastige Sprache, abhilfe soll hier
-durch den Garbage Collector geschaffen werden. Seine Funktion besteht darin
+Trotz des JIT Compilers ist Java eine speicherlastige Sprache, Abhilfe soll hier
+durch den Garbage Collector geschaffen werden. Seine Funktion besteht darin,
 nicht mehr benutzte Objekte aus dem Speicher aufzuspüren und diesen Speicher
-wieder frei zu geben. Je nach Austattung der Systemhardware ist dies von nöten,
+wieder frei zu geben. Je nach Ausstattung der Systemhardware ist dies von Nöten,
 da die JVM theoretisch bis zu 2\textasciicircum64 Adressen zur Verfügung hat.
-Natürlich nur bei 64 Bit basierten Sytemen und mit entsprechender Hardware. Beim Start kann 
+Natürlich nur bei 64 Bit basierten Systemen und mit entsprechender Hardware. Beim Start kann 
 jedoch meist festgelegt werden wieviel Speicher die JVM allokiert, also
-für den Gebrauch reservieren und für anderen Applikationen sperren sool. Der
+für den Gebrauch reservieren und für anderen Applikationen sperren soll. Der
 Garbage Collector sollte für den Benutzer kaum spürbar sein, er verrichtet seine Arbeit
 normalerweise dann wenn die Hardwarelast gering genug ist. Als Ausnahme gilt
 allerdings wenn der allokierte Speicher voll ist und mehr Speicher, zum Beispiel für das
@@ -95,19 +95,20 @@ Garbage Collector auch bei hoher Last seine Arbeit verrichten.
 
 \section{Lambda Ausdrücke}
 \label{sec:Lambda}
-Um Lambda Ausdrücke zu verstehen sollte man den grundsätzlich Unterschied
+Um Lambda Ausdrücke zu verstehen sollte man den grundsätzlichen Unterschied
 zwischen funktionaler und imperativer Programmiersprachen kennen. Vereinfacht
 formuliert: "`bei imperativen Herangehensweisen, welche unter anderem bei Java
 vorkommt, wird im Detail beschrieben, was der Code macht und wie er
 funktioniert.
-Bei funktionalen Sprachen, wie Haskell, wird das Problem als Satz vpn
+Bei funktionalen Sprachen, wie Haskell, wird das Problem als Satz von
 Funktionen formuliert, so dass die Reihenfolge der Berechnungen nicht angegeben
-werden muss."' Das führt dazu das diese Reihenfolge auch garnicht relevant ist.
-Was bringt uns das also? Mit Lambda Ausdrücken kann eine komplexe Funktion
-beschrieben werden, welche aus mehreren Funktionen besteht und muss erst
-dann dafür gesorgt werden das alle Bestandteile zur Verfügung stehen wenn sie
+werden muss."' Das führt dazu, dass diese Reihenfolge nicht relevant
+ist.
+Folgende Vorteile werden dabei nutzbar. Mit Lambda Ausdrücken kann eine komplexe
+Funktion beschrieben werden, welche aus mehreren Funktionen besteht und es muss erst
+dann dafür gesorgt werden, dass alle Bestandteile zur Verfügung stehen wenn sie
 benötigt werden. Das begünstigt Verschachtelung von Funktionen, begrenzt
-allerdings auch die Leserlichkeit von eben diesen Funkionen. Im speziellen ist
+allerdings auch die Leserlichkeit von eben diesen Funktionen. Im Speziellen ist
 die Nutzung dieser Ausdrücke für Gruppen kritisch, sofern nicht alle
 Mitglieder Wissen über funktionale Sprachen bzw.
 Ansätze aufweisen.
@@ -116,42 +117,41 @@ werden können an der sie beschrieben sind. Diese Tatsache ist bei der Verwendun
 von Lambda Ausdrücken wichtig, denn wenn diese Funktion
 noch einmal gebraucht werden, dann sollten sie nicht als Lambda Funktion
 beschrieben werden.
-Lambda Ausdrücke haben die Vorteile, dass wenn man einmal geübt ist, man sich
-jede Menge Code Zeilen, innere Klassen, oder komplett neue Klassen sparen kann
+Lambda Ausdrücke haben die Vorteile, dass wenn man einmal geübt ist, jede Menge
+Code Zeilen, innere Klassen, oder komplett neue Klassen eingespart werden können
 und der Code trotzdem noch lesbar ist. Außerdem muss die JVM dabei weniger Daten
-handlen als bei anderen Herangehensweisen. Letzteres resultiert daher, das sich
-Klassen bzw Funktionen der Klassen gegenseitig Objekte hin und herschieben, was
-bei komplexeren Problemen, bzw. Datenlastigen Objekte auch größere Dimensionen
-und damit erhöhte Rechenleistung mit sich bringt.
+behandeln, als bei anderen Herangehensweisen. Letzteres resultiert daher, dass
+sich Klassen bzw. Funktionen der Klassen gegenseitig Objekte hin und
+herschieben, was bei komplexeren Problemen, bzw. Datenlastigen Objekte auch größere Dimensionen und damit erhöhte Rechenleistung mit sich bringt.
 
 \section{Funktionale Interfaces}
 \label{sec:FI}
 Neben den Lambda-Expressions haben mit Java 8 außerdem funktionale Interfaces
 Einzug erhalten. Jedes Interface welche nur eine Methode besitzt, wird als
 funktionales Interface bezeichnet. Interfaces mit dieser Intention erhalten in
-Java die Annotation \@FunctionalInterface. Sollte das Interface nicht den
-Rahmenbedingungen eines funktionalen Interface genügen wird der Kompiler einen
-Fehler erzeugen. Zu erwähnen sei noch, das egal ob die Annotation vorhanden ist
-oder nicht, der Kompiler wird jedes Interface, welches die Bedingungen erfüllt,
-als funktionales Interface behandeln.
+Java die Annotation @FunctionalInterface. Sollte das Interface nicht den
+Rahmenbedingungen eines funktionalen Interface genügen wird der Compiler einen
+Fehler erzeugen. Zu erwähnen sei noch, dass egal ob die Annotation vorhanden ist
+oder nicht, der Compiler jedes Interface, welches die Bedingungen erfüllt,
+als funktionales Interface behandeln wird.
 Funktionale Interfaces sind in der Lage Lambda Ausdrücke zu verwenden.
 
 \section{Default-Implementierung}
 \label{sec:DI}
 Bisher hatte man in Java-Interfaces keine Methoden Rümpfe, doch mit der
 Einführung der default-Implementierung hat sich auch das geändert. Es sind
-Standardimplementierung für eine Methode eines Interfaces. Das hat zur Folge das
-der Programmierer selbst eintscheiden kann, ob er eine bestimmte Methoden
+Standardimplementierungen für eine Methode eines Interfaces. Das hat zur Folge,
+dass der Programmierer selbst entscheiden kann, ob er eine bestimmte Methoden
 überschreibt um sie für ein spezielles Objekt effektiver zu gestalten.
 
 \section{Iterable-Interface und die forEach-Methode}
 \label{sec:IIufEM}
-Das Iterable-Interface ist gedacht für alle Arten von Objekte die
+Das Iterable-Interface ist gedacht für alle Arten von Objekten die
 "`durchlaufen"' werden können. Eine Neuerung in diesen Interfaces ist die
-forEach-Methode. Diese hilft bei der deutlichen Trennung von Geschäftlogik des
+forEach-Methode. Diese hilft bei der deutlichen Trennung von Geschäftslogik des
 Objekts und dem Code. An dieser Stelle sei gesagt, dass diese Änderung am Anfang
 nur nach mehr Arbeit aussieht. In Verbindung mit Lambda Ausdrücken und
-Funktionalen Interfaces können damit aber sehr effektive Programme endstehen. 
+Funktionalen Interfaces können damit aber sehr effektive Programme entstehen. 
 
 
 \chapter{Praktische Untersuchung neuer Funktionen}
@@ -161,7 +161,7 @@ Funktionalen Interfaces können damit aber sehr effektive Programme endstehen.
 \label{sec:Lambda}
 Um zu veranschaulichen wie sich Lambda Ausdrücke auf den Programmierstil
 auswirken, sieht man nachfolgend an einem Beispiel. Hier wird ein einfacher
-Button beschrieben welcher die Aufgabe hat auf Knofdruck eine Nachricht auf der
+Button beschrieben welcher die Aufgabe hat auf Knopfdruck eine Nachricht auf der
 Java Console auszugeben.
 
 \lstset{language=Java}  
@@ -170,7 +170,8 @@ JButton but = new JButton("Push me!");
 but.addActionListener(new ActionListener(){
 	@override
 	public void actionPerformed(ActionEvent e){
-		System.out.println("Command: " + e.getActionCommand());
+		System.out.println("Command: " 
+		+ e.getActionCommand());
 	}
 });
 \end{lstlisting}
@@ -178,7 +179,7 @@ but.addActionListener(new ActionListener(){
 In Java hat man wie oben ersichtlich bisher sogenannte Anonyme Innerclasses
 verwendet, um den Knopf mit dem Event zu verknüpfen. Davon ausgehend das die
 Funktion die dieser Knopf erfüllt an keiner anderen Stelle noch einmal so benutzt wird ist das vom Programmierstil her
-sauber. Dennoch ist für eine so "`kleine"' Aufgage viel Code von Nöten, dessen
+sauber. Dennoch ist für eine so "`kleine"' Aufgabe viel Code von Nöten, dessen
 Leserlichkeit durch seine Struktur begrenzt ist.
 
 \pagebreak
@@ -186,11 +187,12 @@ Leserlichkeit durch seine Struktur begrenzt ist.
 \begin{lstlisting}
 JButton but = new JButton("Push me!");
 button.addActionListener(
-		(ActionEvent e) -> System.out.plrintln("Command: " + e.getActionCommand())
+	(ActionEvent e) -> System.out.plrintln("Command: " 
+	+ e.getActionCommand())
 );
 \end{lstlisting}
-Dieser Code beschreibt und verhällt sich genau so wie der oben Aufgeführte. Der
-einzige unterschied ist das er mit einem Lambda Ausdruck realisiert wurde.
+Dieser Code beschreibt und verhält sich genau so wie der oben Aufgeführte. Der
+einzige Unterschied ist das er mit einem Lambda Ausdruck realisiert wurde.
 Ein Lambda Ausdruck ist in 3 Teile geteilt:
 \begin{itemize}
 	\item Parameter
@@ -205,14 +207,128 @@ Parameter und Körper und wird durch "`->"' symbolisiert. Alles was nach dem
 Pfeiloperator kommt ist der Funktionskörper, der seinerseits auch wieder einen
 Lambda Ausdruck enthalten kann.
 
-\section{Funktionale Interfaces}
-\label{sec:FI}
-
 \section{Default-Implementierung}
 \label{sec:DI}
 
-\section{Iterable-Interface und die forEach-Methode}
+Die neu eingeführte Default-Implementierung von Interfaces soll am folgenden
+Beispiel veranschaulicht werden.
+
+\begin{lstlisting}
+public Interface Update {
+	public void refreshValue(Integer int);
+}
+\end{lstlisting}
+
+Dieses Interface wird von den folgenden beiden Klassen implementiert.
+
+\begin{lstlisting}
+public Class NeedsValueUpdate implements Update {
+	@Override
+	public void refresh(Integer int) {
+		value = int;
+	}
+}
+\end{lstlisting}
+
+\begin{lstlisting}
+public Class NeedsValueUpdateToo implements Update {
+	@Override
+	public void refresh(Integer int) {
+		value = int;
+	}
+}
+\end{lstlisting}
+
+Für eine neue Anforderung soll das Interface nun erweitert werden. Bisher war es
+notwendig die Methode in jeder Klasse, welche das Interface implementiert
+hatte, ebenso zu implementieren. Bei mehreren Klassen bedeutet dies einen nicht
+zu vernachlässigbaren Aufwand. Die Default-Implementierung lässt jetzt zu, dass
+direkt im Interface eine Standardimplementierung festgelegt werden kann. Damit
+ist es nicht mehr notwendig die Klassen anzupassen.
+
+\begin{lstlisting}
+public Interface Update {
+	public void refreshValue(Integer int);
+	
+	default public void printValue(Integer int) {
+		System.out.println("Value: " + int);
+	}
+}
+\end{lstlisting}
+
+Diese Funktion bringt jedoch auch Nachteile mit sich. Es besteht die
+Möglichkeit, dass eine Klasse zwei Interfaces implementiert. Wenn diese
+Interfaces nun zwei Standard-Implementierungen von Methoden mit gleichem Namen
+beinhalten, tritt ein Konflikt auf.
+\newline
+
+\begin{lstlisting}
+public Interface AnotherUpdate {
+	default public void printValue(Integer int) {
+		System.out.println("Other Value: " + int);
+	}
+}
+\end{lstlisting}
+
+Wenn dieses Interface nun von der Klasse NeedsValueUpdateToo ebenso
+implementiert wird, dann muss manuell angegeben werden, welche
+Standard-Implementierung genutzt werden soll, besonders wenn die Methode nicht
+überschrieben wird.
+
+\begin{lstlisting}
+public Class NeedsValueUpdateToo implements Update, AnotherUpdate {
+	@Override
+	public void refresh(Integer int) {
+		value = int;
+	}
+	
+	@Override
+	public void printValue(Integer int) {
+		AnotherUpdate.super.printValue(int);
+	}
+}
+\end{lstlisting}
+
+\section{Funktionale Interfaces, Iterable-Interface und die forEach-Methode}
 \label{sec:IIufEM}
+
+Bis Java 8 wurde das Durchlaufen von Daten folgendermaßen durchgeführt:
+
+\begin{lstlisting}
+List<String> stringList = Arrays.asList("first", "second", "third");
+for (String string : stringList) {
+	System.out.println(string);
+}
+\end{lstlisting}
+
+Mit der neuen forEach-Methode, die im Iterable-Interface dazugekommen ist, wird
+die gleiche Funktion wie folgt aufgerufen:
+
+\begin{lstlisting}
+List<String> stringList = Arrays.asList("first", "second", "third");
+stringList.forEach(new Consumer<String>() {
+	public void accept(String string) {
+		System.out.println(string);
+	}
+}
+\end{lstlisting}
+
+Diese Implementierung bringt eine zwar eine bessere Trennung von Iteration und
+Verarbeitung der Elemente mit sich, ist jedoch länger, verschachtelter und
+dadurch unübersichtlicher als die zuvor gezeigte. Abhilfe schaffen hier
+Lambda-Expressions, die den Quelltext im Gegensatz zum ersten Beispiel verkürzen
+und Übersichtlichkeit bewahren. Somit kann die Abbildung des Durchlaufens auf
+eine Zeile verringert werden.
+Die Lambda-Expression darf bei diesem Beispiel genutzt werden, da das Interface
+Iterable ein FunctionalInterface ist.
+
+Der unter Hilfenahme der oben beschriebenen Methoden resultierende Quelltext
+wird im folgenden dargestellt.
+
+\begin{lstlisting}
+List<String> stringList = Arrays.asList("first", "second", "third");
+stringList.forEach((String string) -> System.out.println(string));
+\end{lstlisting}
 
 \chapter{Zusammenfassung}
 \label{sec:Fazit}
